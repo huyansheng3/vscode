@@ -6,3 +6,25 @@
 3、支持编辑时光标预测和续写功能
 
 先不要直接修改代码，告诉我实现方案，告诉我需要新增、修改哪些文件，我再告诉你修改哪些文件。
+
+
+notes:
+
+1、由于是在仓库内开发，其他vscode 依赖引入始终保持相对路径的风格，和其他页面保持一致
+
+```
+import './media/aiAssistant.css';
+import { IEditorService } from '../../../../workbench/services/editor/common/editorService.js';
+import { ICodeEditor } from '../../../../editor/browser/editorBrowser.js';
+import * as DOM from '../../../../base/browser/dom.js';
+import { IInstantiationService } from '../../../../platform/instantiation/common/instantiation.js';
+import { IThemeService } from '../../../../platform/theme/common/themeService.js';
+import { registerIcon } from '../../../../platform/theme/common/iconRegistry.js';
+import { localize } from '../../../../nls.js';
+import { Codicon } from '../../../../base/common/codicons.js';
+
+```
+
+2、修改完不需要帮我执行 npm run compile，因为这个执行很慢，通常只需要执行一次即可；我会自己控制执行时机
+
+3、

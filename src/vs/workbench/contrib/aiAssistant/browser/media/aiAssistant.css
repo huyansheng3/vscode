@@ -1,0 +1,259 @@
+/* 整体容器样式 */
+.ai-assistant-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: var(--monaco-monospace-font);
+    color: var(--vscode-foreground);
+    background-color: var(--vscode-editor-background);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.ai-assistant-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 消息列表区域 */
+.ai-assistant-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--vscode-editor-background);
+    scroll-behavior: smooth;
+}
+
+/* 滚动条样式 */
+.ai-assistant-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ai-assistant-messages::-webkit-scrollbar-track {
+    background: var(--vscode-scrollbarSlider-background);
+    border-radius: 4px;
+}
+
+.ai-assistant-messages::-webkit-scrollbar-thumb {
+    background-color: var(--vscode-scrollbarSlider-hoverBackground);
+    border-radius: 4px;
+}
+
+/* 消息气泡样式 */
+.ai-assistant-message {
+    position: relative;
+    padding: 12px 16px;
+    border-radius: 12px;
+    max-width: 85%;
+    animation: fadeIn 0.3s ease-out;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    word-break: break-word;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ai-assistant-message.user {
+    align-self: flex-end;
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border-bottom-right-radius: 4px;
+}
+
+.ai-assistant-message.assistant {
+    align-self: flex-start;
+    background-color: var(--vscode-editor-inactiveSelectionBackground);
+    color: var(--vscode-editor-foreground);
+    border-bottom-left-radius: 4px;
+}
+
+.ai-assistant-message.loading {
+    background-color: var(--vscode-editor-inactiveSelectionBackground);
+    color: var(--vscode-descriptionForeground);
+}
+
+.ai-assistant-message.loading::after {
+    content: "...";
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { content: "."; }
+    33% { content: ".."; }
+    66% { content: "..."; }
+}
+
+.ai-assistant-message.error {
+    background-color: var(--vscode-errorForeground);
+    opacity: 0.7;
+    color: var(--vscode-editor-background);
+}
+
+/* 发送者样式 */
+.ai-assistant-sender {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+
+/* 消息内容样式 */
+.ai-assistant-content {
+    white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+/* 代码块样式 */
+.ai-assistant-content pre {
+    background-color: var(--vscode-textBlockQuote-background);
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 8px 0;
+    overflow-x: auto;
+    border-left: 3px solid var(--vscode-textLink-activeForeground);
+}
+
+.ai-assistant-content code {
+    font-family: var(--vscode-editor-font-family);
+    font-size: 13px;
+    white-space: pre;
+    word-break: normal;
+}
+
+/* 输入区域样式 */
+.ai-assistant-input-container {
+    display: flex;
+    padding: 12px 16px;
+    gap: 10px;
+    border-top: 1px solid var(--vscode-panel-border);
+    background-color: var(--vscode-sideBar-background);
+    position: relative;
+}
+
+.ai-assistant-input {
+    flex: 1;
+    padding: 10px 14px;
+    resize: none;
+    border: 1px solid var(--vscode-input-border);
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border-radius: 8px;
+    font-family: var(--monaco-monospace-font);
+    font-size: 14px;
+    line-height: 1.5;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.ai-assistant-input:focus {
+    border-color: var(--vscode-focusBorder);
+    box-shadow: 0 0 0 1px var(--vscode-focusBorder);
+}
+
+.ai-assistant-input::placeholder {
+    color: var(--vscode-input-placeholderForeground);
+    opacity: 0.7;
+}
+
+/* 发送按钮样式 */
+.ai-assistant-send-button {
+    padding: 8px 16px;
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+}
+
+.ai-assistant-send-button:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+.ai-assistant-send-button:active {
+    transform: translateY(1px);
+}
+
+/* 错误提示样式 */
+.ai-assistant-error {
+    padding: 12px 16px;
+    background-color: rgba(239, 83, 80, 0.1);
+    border-left: 3px solid var(--vscode-errorForeground);
+    color: var(--vscode-errorForeground);
+    margin: 16px;
+    border-radius: 4px;
+}
+
+/* 标题样式优化 */
+.ai-assistant-panel h3.title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.ai-assistant-panel .title-icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    color: var(--vscode-symbolIcon-classForeground);
+}
+
+/* 时间戳显示 */
+.ai-assistant-timestamp {
+    font-size: 0.7em;
+    margin-top: 4px;
+    opacity: 0.6;
+    text-align: right;
+}
+
+/* 动态打字效果 */
+.ai-assistant-typing {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 8px 12px;
+}
+
+.ai-assistant-typing span {
+    width: 6px;
+    height: 6px;
+    background-color: var(--vscode-activityBarBadge-background);
+    border-radius: 50%;
+    display: inline-block;
+    animation: typing 1.4s infinite ease-in-out both;
+}
+
+.ai-assistant-typing span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.ai-assistant-typing span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes typing {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .ai-assistant-message {
+        max-width: 90%;
+    }
+}
