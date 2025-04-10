@@ -194,6 +194,9 @@ import './contrib/chat/browser/chat.contribution.js';
 import './contrib/inlineChat/browser/inlineChat.contribution.js';
 import './contrib/mcp/browser/mcp.contribution.js';
 
+// AI Assistant
+import './contrib/aiAssistant/browser/aiAssistant.contribution.js';
+
 // Interactive
 import './contrib/interactive/browser/interactive.contribution.js';
 
